@@ -1,12 +1,23 @@
-var express = require("express")
-var app = express()
-var bodyParser = require("body-parser")
-var expressSanitizer = require("express-sanitizer")
-var mongoose = require("mongoose")
-var methodOverride = require("method-override")
+const express = require("express")
+const app = express()
+const bodyParser = require("body-parser")
+const expressSanitizer = require("express-sanitizer")
+const methodOverride = require("method-override")
+const mongoose = require("mongoose")
 
 
-mongoose.connect("mongodb://localhost:27017/blog_app", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+//mongoose.connect("mongodb://localhost:27017/blog_app", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+
+mongoose.connect("mongodb+srv://blog:blog123@mongodbtrial-bxegw.mongodb.net/test?retryWrites=true&w=majority", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true, 
+    useCreateIndex: true
+}).then( () => {
+    console.log("Connected to DB!")
+}).catch( err => {
+    console.log("Error:", err.message)
+}) 
+
 
 app.set("view engine", 'ejs')
 app.use(bodyParser.urlencoded({extended: true}))
