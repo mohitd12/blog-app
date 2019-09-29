@@ -74,6 +74,10 @@ textarea{
     object-fit: cover;
 }
 
+.ui.form{
+    margin: 0 auto;
+    width: 390px;
+}
 
 
 

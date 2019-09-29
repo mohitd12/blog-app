@@ -1,0 +1,50 @@
+<% include partials/header %>
+
+ <form class="ui form" action="https://formspree.io/mohitdass589@gmail.com" method="POST">
+        <div class="field">
+            <label>Name</label>
+            <input type="text" name="name" autocomplete="off" placeholder="name" required>
+        </div>
+        <div class="field">
+            <label>Email</label>
+            <input type="email"  name="email" autocomplete="email" placeholder="email id" required>
+        </div>
+        <div class="field">
+            <label>Query</label>
+            <textarea name="query" autocomplete="off" placeholder="query here...." required></textarea>
+        </div>
+        <div class="grouped fields">
+            <label>Class</label>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input id='six' type="radio" name="class" value="6-7">
+                    <label for="six">6-7</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input id='eight' type="radio" name="class" value="8-10">
+                    <label for="eight">8-10</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input id="eleven" type="radio" name="class" value="11-12"> 
+                    <label for="eleven">11-12</label>
+                </div>
+            </div>
+      </div>
+        <button class="ui button" type="submit">Submit</button>
+    </form>
+    
+
+
+
+
+
+
+
+
+
+
+<% include partials/footer %>
