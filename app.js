@@ -133,12 +133,12 @@ app.get("/welcome", (req, res) => {
 app.post("/send", (req, res) => {
     
     const output = `
-        <p>Form Submission Request Here!</p>
         <h3>Contact Details</h3>
         <ul>
             <li><b>Name:</b> ${req.body.name}</li>
             <li><b>Email Id:</b> ${req.body.email}</li>
-            <li><b>Class:</b> ${req.body.query}</li>
+            <li><b>Class:</b> ${req.body.class}</li>
+            <li><b>Query:</b> ${req.body.query}</li>
         </ul>
         <em>The Nodemailer Setup.</em>
     `;
@@ -148,25 +148,22 @@ app.post("/send", (req, res) => {
         port: 465,
         secure: true, 
         auth: {
-            user: 'goodwinmohit@gmail.com', // generated ethereal user
-            pass: 'otvtggkmalgirwpj' // generated ethereal password
+            user: 'goodwinmohit@gmail.com', 
+            pass: 'otvtggkmalgirwpj'
         }
     });
     
     let mailOptions = {
-      from: '"Nodemailer is Safe 👻" <goodwinmohit@gmail.com>', // sender address
-      to: 'mohitdass589@gmail.com', // list of receivers
-      subject: 'NodeApp Contact Request', // Subject line
-      text: 'Hello world?', // plain text body
-      html: output // html body
+      from: '"Form submission held!" <goodwinmohit@gmail.com>',
+      to: 'mohitdass589@gmail.com',
+      subject: 'NodeMailer Request',
+      html: output
     };
     
-        // send mail with defined transport object
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             return console.log(error);
         }
-        console.log('Message sent: %s', info.messageId);   
         res.redirect('/welcome')
     });
 })
