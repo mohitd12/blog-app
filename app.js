@@ -4,6 +4,7 @@ const bodyParser = require("body-parser")
 const expressSanitizer = require("express-sanitizer")
 const methodOverride = require("method-override")
 const mongoose = require("mongoose")
+const nodemailer = require('nodemailer')
 
 
 //mongoose.connect("mongodb://localhost:27017/blog_app", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
@@ -115,8 +116,62 @@ app.delete("/blogs/:id", (req, res) => {
 })
 
 app.get("/contact", (req, res) => {
-    res.render("contact")
+    
+    const mail = "mohitdass589@gmail.com"
+    
+    res.render("contact", {mail: mail})
 })
+
+
+
+// Form Routes
+
+app.get("/welcome", (req, res) => {
+    res.render("thankyou")
+})
+
+app.post("/send", (req, res) => {
+    
+    const output = `
+        <p>Form Submission Request Here!</p>
+        <h3>Contact Details</h3>
+        <ul>
+            <li><b>Name:</b> ${req.body.name}</li>
+            <li><b>Email Id:</b> ${req.body.email}</li>
+            <li><b>Class:</b> ${req.body.query}</li>
+        </ul>
+        <em>The Nodemailer Setup.</em>
+    `;
+    
+    let transporter = nodemailer.createTransport({
+        service: "Gmail", 
+        port: 465,
+        secure: true, 
+        auth: {
+            user: 'goodwinmohit@gmail.com', // generated ethereal user
+            pass: 'otvtggkmalgirwpj' // generated ethereal password
+        }
+    });
+    
+    let mailOptions = {
+      from: '"Nodemailer is Safe 👻" <goodwinmohit@gmail.com>', // sender address
+      to: 'mohitdass589@gmail.com', // list of receivers
+      subject: 'NodeApp Contact Request', // Subject line
+      text: 'Hello world?', // plain text body
+      html: output // html body
+    };
+    
+        // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);   
+        res.redirect('/welcome')
+    });
+})
+
+
 
 app.get("*", (req, res) => {
     res.send("404 error")
