@@ -1,14 +1,15 @@
 <% include partials/header %>
 
-<h1>Blogs Page</h1>
 <div class="main-wrapper">
     <% blogs.forEach(function(blog){ %>
     <div class="blog-wrapper">
         <h2><%= blog.title %></h2>
         <img src="<%= blog.image %>">
         <span class="date"><%= blog.created.toDateString() %></span>
-        <p class="description"><%= blog.body.substring(0, 100) %></p>
-        <a href="/blogs/<%= blog._id %>">Know more</a>
+        <p class="description">
+            <%= blog.body.substring(0, 100) %>
+            <a href="/blogs/<%= blog._id %>">Open blog</a>
+        </p>
     </div>
     <% }) %>
 </div>
